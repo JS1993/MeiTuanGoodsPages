@@ -51,15 +51,10 @@
         [self.scrollV addSubview:self.headerV];
     }
     
-    if (offsetY<-64) {
-        
-        self.imageV.transform=CGAffineTransformMakeScale(1-offsetY/70, 1-offsetY/70);
-        
-    }else{
-        
-       self.imageV.transform=CGAffineTransformMakeScale(1, 1);
-        
-    }
+    
+    CGFloat scale=offsetY>-64?1:1-offsetY/70;
+    
+    self.imageV.transform=CGAffineTransformMakeScale(scale, scale);
     
 }
 
