@@ -26,10 +26,40 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     
-    CGFloat imageH=self.imageV.bounds.size.height;
+    CGFloat imageH=self.imageV.frame.size.height;
     
     CGFloat offsetY=scrollView.contentOffset.y;
     
+    if (offsetY>imageH-64) {
+       
+        CGRect frame=self.headerV.frame;
+        
+        frame.origin.y=64;
+        
+        self.headerV.frame=frame;
+        
+        [self.view addSubview:self.headerV];
+        
+    }else{
+        
+        CGRect frame=self.headerV.frame;
+        
+        frame.origin.y=173;
+        
+        self.headerV.frame=frame;
+        
+        [self.scrollV addSubview:self.headerV];
+    }
+    
+    if (offsetY<-64) {
+        
+        self.imageV.transform=CGAffineTransformMakeScale(1-offsetY/70, 1-offsetY/70);
+        
+    }else{
+        
+       self.imageV.transform=CGAffineTransformMakeScale(1, 1);
+        
+    }
     
 }
 
